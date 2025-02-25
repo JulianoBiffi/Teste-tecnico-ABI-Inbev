@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  ambev.developerevaluation.webapi:
+    build:
+      context: .
+      dockerfile: src/Ambev.DeveloperEvaluation.WebApi/Dockerfile
+    volumes:
+      - .:/app
+      - ./secrets:/home/app/.microsoft/usersecrets:ro
+      - ./certs:/home/app/.aspnet/https:ro
+    environment:
+      - DOTNET_USE_POLLING_FILE_WATCHER=1
+
+  ambev.developerevaluation.database:
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data

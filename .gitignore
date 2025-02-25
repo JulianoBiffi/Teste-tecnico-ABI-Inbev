@@ -363,3 +363,5 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 Teste Técnico - ABI.zip
+/template/backend/.env
+/template/backend/data/postgres
