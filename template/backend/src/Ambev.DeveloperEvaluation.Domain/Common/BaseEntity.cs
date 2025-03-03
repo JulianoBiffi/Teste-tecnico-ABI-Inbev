@@ -2,7 +2,7 @@
 
 namespace Ambev.DeveloperEvaluation.Domain.Common;
 
-public class BaseEntity : IComparable<BaseEntity>
+public class BaseEntity : IComparable<BaseEntity>, IEntity
 {
     public Guid Id { get; set; }
 

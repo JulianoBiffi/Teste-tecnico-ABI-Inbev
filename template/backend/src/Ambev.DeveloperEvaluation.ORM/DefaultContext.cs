@@ -8,7 +8,25 @@ namespace Ambev.DeveloperEvaluation.ORM;
 
 public class DefaultContext : DbContext
 {
+    /// <summary>
+    /// Gets or sets the representation of the table User.
+    /// </summary>
     public DbSet<User> Users { get; set; }
+
+    /// <summary>
+    /// Gets or sets the representation of the table Products.
+    /// </summary>
+    public DbSet<Products> Products { get; set; }
+
+    /// <summary>
+    /// Gets or sets the representation of the table Carts.
+    /// </summary>
+    public DbSet<Carts> Carts { get; set; }
+
+    /// <summary>
+    /// Gets or sets the representation of the table CartProductItem.
+    /// </summary>
+    public DbSet<CartProductItem> CartProductItem { get; set; }
 
     public DefaultContext(DbContextOptions<DefaultContext> options) : base(options)
     {
