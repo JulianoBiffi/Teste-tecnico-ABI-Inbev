@@ -1,8 +1,9 @@
-# Developer Evaluation Project
 
-## How to run?
+# How to run?
 
 To verify how to run this project, verify the [how to run](/.doc/how-to-run.md) documentation.
+
+# Developer Evaluation Project
 
 `READ CAREFULLY`
 
