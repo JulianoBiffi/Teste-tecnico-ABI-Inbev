@@ -1,4 +1,4 @@
-#What is left to develop?
+# What is left to develop?
 
 Due to a lack of time, I was unable to complete the project. My next steps would be:
 - Finish the CRUD for products, as it currently only includes product creation.
@@ -11,32 +11,28 @@ Due to a lack of time, I was unable to complete the project. My next steps would
 - Integrate with RabbitMQ.
 - Enqueue sales messages to RabbitMQ.
 
-#How to run?
+# How to run?
 
 ### Configurarion of docker
 First of all, you will need to create de docker containers.
 
 Check if Docker is running with the command:
-```sh
-docker ps```
+```docker ps```
 If an error is returned, open Docker and try running the command again.
 
 Now with docker running, run:
-```sh
-docker-compose up```
+```docker-compose up```
 
 ### Executing migrations
 
 Open the `Package Manager Console` at `Tools > NuGet Package Manager > Package Manager Console`
 
 Select the project `Ambev.DeveloperEvaluation.ORM` or run
-```sh
-cd .\src\Ambev.DeveloperEvaluation.ORM```
+```cd .\src\Ambev.DeveloperEvaluation.ORM```
 
 
 Now run commands to create the databases
-```sh
-dotnet ef database update```
+```dotnet ef database update```
 
 
 ### Executing migrations
