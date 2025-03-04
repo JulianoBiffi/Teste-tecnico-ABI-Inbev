@@ -1,3 +1,4 @@
+using Ambev.DeveloperEvaluation.Domain.Common;
 using Ambev.DeveloperEvaluation.Domain.Entities;
 
 namespace Ambev.DeveloperEvaluation.Domain.Repositories;
@@ -37,4 +38,18 @@ public interface IProductsRepository
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>Every <see cref="Products"/> that was found in the table</returns>
     Task<IEnumerable<Products>> GetAllAsync(CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Retrieves every <see cref="Products"/> of the database, paged.
+    /// </summary>
+    /// <param name="page">The current page</param>
+    /// <param name="size">Total size of page</param>
+    /// <param name="order">The order to be paged</param>
+    /// <param name="cancellationToken">Cancellation token</param>
+    /// <returns>The list of <see cref="Products"/> with expected records</returns>
+    Task<IEnumerable<Products>> GetAllPagedAsync(
+        int page = 1,
+        int size = 10,
+        string? order = null,
+        CancellationToken cancellationToken = default);
 }

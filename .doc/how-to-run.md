@@ -35,6 +35,6 @@ Now run commands to create the databases
 ```dotnet ef database update```
 
 
-### Executing migrations
+### Running the application
 
 Expand the ```Adapters > Drivers > WebApi```, right click on `Ambev.DeveloperEvaluation.WebApi` and select `Set as Startup Project`. Now you are ready to run the application.

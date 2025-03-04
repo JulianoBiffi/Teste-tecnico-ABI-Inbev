@@ -29,4 +29,10 @@ public class ProductsRepository : BaseRepository<Products, DefaultContext>, IPro
     /// <inheritdoc/>
     public async Task<Products?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
         => await base.GetByIdAsync(id, cancellationToken);
+
+    /// <inheritdoc/>
+    public async Task<IEnumerable<Products>> GetAllPagedAsync(int page, int size, string? order, CancellationToken cancellationToken = default)
+    {
+        return await base.GetAllPagedAsync(page, size, order, cancellationToken);
+    }
 }
