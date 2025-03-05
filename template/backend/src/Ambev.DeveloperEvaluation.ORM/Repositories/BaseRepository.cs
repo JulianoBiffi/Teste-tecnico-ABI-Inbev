@@ -1,5 +1,6 @@
 ﻿using Ambev.DeveloperEvaluation.Domain.Common;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Dynamic.Core;
 
 namespace Ambev.DeveloperEvaluation.ORM.Repositories;
 
@@ -88,5 +89,45 @@ public abstract class BaseRepository<TEntity, TContext> where TEntity : class, I
     protected virtual async Task<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationToken = default)
     {
         return await _Context.Set<TEntity>().ToListAsync(cancellationToken);
+    }
+
+    /// <summary>
+    /// Retrieves the <see cref="IQueryable"/> of every records of <typeparamref name="TEntity"/> from the database context, and apply the orderby when is provided.
+    /// </summary>
+    /// <param name="order">The order by clause like: Something desc, AnotherThing asc</param>
+    /// <returns><see cref="IQueryable"/> of records</returns>
+    protected virtual IQueryable<TEntity> GetAllQueryableOrdered(string? order = null)
+    {
+        var currentQueryable =
+            _Context.Set<TEntity>()
+                    .AsQueryable();
+
+        if (!string.IsNullOrEmpty(order))
+        {
+            var currentAvailableProperties =
+                typeof(TEntity).GetProperties();
+
+            bool canBeOrdered =
+                order.Split(',')
+                     .Select(field => field.Trim()
+                                           .Replace(" asc", string.Empty)
+                                           .Replace(" desc", string.Empty))
+                     .All(field => currentAvailableProperties.Any(prop => prop.Name.Equals(field, StringComparison.OrdinalIgnoreCase)));
+
+            if (canBeOrdered)
+            {
+                var orderClause =
+                   string.Join(
+                       ",",
+                       order.Split(',')
+                            .Select(field => field.Trim()
+                                                  .Replace(" asc", " ascending")
+                                                  .Replace(" desc", " descending")));
+
+                currentQueryable = currentQueryable.OrderBy(orderClause);
+            }
+        }
+
+        return currentQueryable;
     }
 }

@@ -1,7 +1,7 @@
 # What is left to develop?
 
 Due to a lack of time, I was unable to complete the project. My next steps would be:
-- Finish the CRUD for products, as it currently only includes product creation.
+- Finish the CRUD for products, as it currently only includes product creation, get all and get product by id.
 - Implement the CRUD for Cart and Cart Items.
 - Write unit tests for the validators.
 - Perform integration tests to verify that all fields are correctly persisted in the database.
@@ -35,6 +35,6 @@ Now run commands to create the databases
 ```dotnet ef database update```
 
 
-### Executing migrations
+### Running the application
 
 Expand the ```Adapters > Drivers > WebApi```, right click on `Ambev.DeveloperEvaluation.WebApi` and select `Set as Startup Project`. Now you are ready to run the application.

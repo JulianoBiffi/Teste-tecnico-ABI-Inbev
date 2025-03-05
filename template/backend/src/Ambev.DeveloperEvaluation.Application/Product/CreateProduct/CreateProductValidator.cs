@@ -41,6 +41,7 @@ public class CreateProductCommandValidator : AbstractValidator<CreateProductComm
             .WithMessage("Image URL cannot be longer than 255 characters.")
             .Must(imageUrl => Uri.TryCreate(imageUrl, UriKind.Absolute, out _))
             .When(product => !string.IsNullOrEmpty(product.Image))
+            .WithMessage("Image URL must be a valid URL.")
             .SetValidator(new SqlInjectionValidator());
 
         RuleFor(product => product.RatingRate)

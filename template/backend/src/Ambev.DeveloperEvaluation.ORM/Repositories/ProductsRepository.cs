@@ -1,4 +1,5 @@
-﻿using Ambev.DeveloperEvaluation.Domain.Entities;
+﻿using Ambev.DeveloperEvaluation.Common.Pagination;
+using Ambev.DeveloperEvaluation.Domain.Entities;
 using Ambev.DeveloperEvaluation.Domain.Repositories;
 
 namespace Ambev.DeveloperEvaluation.ORM.Repositories;
@@ -29,4 +30,22 @@ public class ProductsRepository : BaseRepository<Products, DefaultContext>, IPro
     /// <inheritdoc/>
     public async Task<Products?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
         => await base.GetByIdAsync(id, cancellationToken);
+
+    /// <inheritdoc/>
+    public async Task<PaginatedList<Products>> GetAllPagedAsync(
+        int page,
+        int size,
+        string? order,
+        CancellationToken cancellationToken = default)
+    {
+        var currentQuery =
+            GetAllQueryableOrdered(order);
+
+        return
+            await PaginatedList<Products>.CreateAsync(
+                currentQuery,
+                page,
+                size,
+                cancellationToken);
+    }
 }
