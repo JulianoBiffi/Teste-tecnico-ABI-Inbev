@@ -1,12 +1,9 @@
-﻿using Ambev.DeveloperEvaluation.Common.Pagination;
-using MediatR;
-
-namespace Ambev.DeveloperEvaluation.WebApi.Features.Products.GetProducts;
+﻿namespace Ambev.DeveloperEvaluation.WebApi.Features.Products.GetProducts;
 
 /// <summary>
 /// Represents a request to get a list of products
 /// </summary>
-public class GetProductsRequest : IRequest<PaginatedList<GetProductsResponse>>
+public class GetProductsRequest
 {
     /// <summary>
     /// The page number for pagination (default: 1)

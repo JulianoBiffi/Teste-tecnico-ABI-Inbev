@@ -105,26 +105,27 @@ public abstract class BaseRepository<TEntity, TContext> where TEntity : class, I
         if (!string.IsNullOrEmpty(order))
         {
             var currentAvailableProperties =
-                typeof(TEntity).GetProperties();
+                typeof(TEntity).GetProperties()
+                               .Select(p => p.Name)
+                               .ToHashSet(StringComparer.OrdinalIgnoreCase);
 
             bool canBeOrdered =
                 order.Split(',')
-                     .Select(field => field.Trim()
-                                           .Replace(" asc", string.Empty)
-                                           .Replace(" desc", string.Empty))
-                     .All(field => currentAvailableProperties.Any(prop => prop.Name.Equals(field, StringComparison.OrdinalIgnoreCase)));
+                     .Select(field => field.Trim().Split(' ')[0])
+                     .All(currentAvailableProperties.Contains);
 
             if (canBeOrdered)
             {
                 var orderClause =
-                   string.Join(
-                       ",",
-                       order.Split(',')
-                            .Select(field => field.Trim()
-                                                  .Replace(" asc", " ascending")
-                                                  .Replace(" desc", " descending")));
+                    string.Join(
+                        ",",
+                        order.Split(',')
+                             .Select(field => field.Trim()
+                                                   .Replace(" asc", " ascending", StringComparison.OrdinalIgnoreCase)
+                                                   .Replace(" desc", " descending", StringComparison.OrdinalIgnoreCase)));
 
-                currentQueryable = currentQueryable.OrderBy(orderClause);
+                currentQueryable =
+                    currentQueryable.OrderBy(orderClause);
             }
         }
 

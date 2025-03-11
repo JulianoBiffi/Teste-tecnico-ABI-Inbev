@@ -99,7 +99,7 @@ public class ProductsController : BaseController
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>A paginated list of products</returns>
     [HttpGet]
-    [ProducesResponseType(typeof(ApiResponseWithData<PaginatedList<GetProductsResponse>>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ApiResponseWithData<PaginatedList<GetProductsResult>>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetProducts([FromQuery] int? _page, [FromQuery] int? _size, [FromQuery] string? _order, CancellationToken cancellationToken)
     {
         var currentRequest =
